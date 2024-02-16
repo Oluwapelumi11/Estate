@@ -14,13 +14,13 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import os
-from dotenv import load_dotenv
+# from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 
-load_dotenv()
+# load_dotenv()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'contact',
     'agents',
     'Properties',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -82,12 +83,24 @@ WSGI_APPLICATION = 'Estate.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR + '/db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": os.getenv("DB_ENGINE"),
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": int(os.getenv("DB_PORT")),
     }
 }
+
 
 
 # Password validation
@@ -135,38 +148,38 @@ MEDIA_URL = "media/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# CORS_ORIGIN_ALLOW_ALL = True
-#
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-#
-# EMAIL_HOST = os.environ.get('EMAIL_HOST')
-# EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
-# EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
-# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
-#
-#
-# ALLOWED_HOSTS = ['.vercel.app', '.now.sh','127.0.0.1','localhost']
-#
-#
+CORS_ORIGIN_ALLOW_ALL = True
 
-#
-#
-#
-# AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
-# AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
-# AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-# AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-#
-#
-#
-#   # e.g., us-west-2
-# AWS_S3_SIGNATURE_NAME ="s3v4"
-# AWS_S3_FILE_OVERWRITE =False
-# AWS_S3_DEFAULT_ACL =None
-# AWS_S3_VERITY = True
-#
-#
-# # Use Amazon S3 for storage for uploaded media files.
-# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = int(os.environ.get('EMAIL_PORT', 587))
+EMAIL_USE_TLS = os.environ.get('EMAIL_USE_TLS', 'True').lower() == 'true'
+EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+
+
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh','127.0.0.1','localhost']
+
+
+
+
+
+
+AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
+AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
+AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
+AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
+
+
+
+  # e.g., us-west-2
+AWS_S3_SIGNATURE_NAME ="s3v4"
+AWS_S3_FILE_OVERWRITE =False
+AWS_S3_DEFAULT_ACL =None
+AWS_S3_VERITY = True
+
+
+# Use Amazon S3 for storage for uploaded media files.
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 

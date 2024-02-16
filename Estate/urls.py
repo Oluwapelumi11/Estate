@@ -20,9 +20,13 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+from Properties.views import PropertyListAPIView
+from agents.views import AgentListAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/properties/', PropertyListAPIView.as_view(), name='property-list'),
+    path('api/agents/', AgentListAPIView.as_view(), name='agent-list'),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
