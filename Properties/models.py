@@ -42,6 +42,8 @@ class Image(models.Model):
     property = models.ForeignKey(Property, related_name="images", on_delete=models.CASCADE)
     image = models.ImageField(("Add Image"), upload_to="Properties/",null=True, blank=True)
 
+    def __str__(self):
+        return f"{self.property.name} - Image"
 
     # bedroom
 
