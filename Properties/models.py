@@ -43,7 +43,7 @@ class Image(models.Model):
     image = models.ImageField(("Add Image"), upload_to="Properties/",null=True, blank=True)
 
     def __str__(self):
-        return f"{self.property.name} - Image"
+        return f"{self.property.title} - Image"
 
     # bedroom
 

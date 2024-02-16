@@ -17,7 +17,7 @@ import os
 from dotenv import load_dotenv
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+# from storages.backends.s3boto3 import S3Boto3Storage
 STATIC_DIR = os.path.join(BASE_DIR,'static')
 
 load_dotenv()
@@ -29,7 +29,7 @@ load_dotenv()
 SECRET_KEY = 'django-insecure-)7u8)d)ku3drg^lc9$28gc3znm+pk9%cmtht%0voril*1s)8=b'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'agents',
     'Properties',
     'rest_framework',
+    'storages',
 ]
 
 MIDDLEWARE = [
