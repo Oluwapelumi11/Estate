@@ -1,7 +1,15 @@
 from rest_framework import serializers
-from .models import Property
+from .models import Property,Image
 from datetime import date
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Image
+        fields = ('id', 'image')  
+
 class PropertySerializer(serializers.ModelSerializer):
+    images = ImageSerializer(many=True, read_only=True)
     class Meta:
         model = Property
         fields = '__all__'

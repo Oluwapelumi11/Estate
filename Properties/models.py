@@ -31,13 +31,21 @@ class Property(models.Model):
     laundry_room_equipment = models.CharField("Laundry Equipments", max_length=50,blank=True,null=True)
     living_room_size = models.CharField("Living Room Size",max_length=50,blank=True,null=True)
     kitchen = models.CharField("Kitchen Size",max_length=50,blank=True,null=True)
+    featured = models.BooleanField(("Feature This Property"), default=False)
+    description = models.TextField(("Property Description"),null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.title} - {self.city}"
+
+
+class Image(models.Model):
+    property = models.ForeignKey(Property, related_name="images", on_delete=models.CASCADE)
+    image = models.ImageField(("Add Image"), upload_to="Properties/",null=True, blank=True)
 
 
     # bedroom
 
 
-    def __str__(self):
-        return f"{self.title} - {self.city}"
 
 
 
