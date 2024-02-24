@@ -5,13 +5,14 @@ from agents.models import Agent
 class Property(models.Model):
     title = models.CharField('Title', max_length=100)
     owner = models.ForeignKey(Agent, on_delete=models.CASCADE)
-    property_type = (
+    property_category_choice = (
         ("LIVING HOUSE", "Living House"),
         ("HOUSE VILLA", "House Villa"),
         ("HOUSE APARTMENT", "House Apartment"),
         ("OFFICE FLOOR", "Office Floor")
     )
-    type = models.CharField("Property Type", choices=property_type, default="LIVING HOUSE", max_length=20,blank=True,null=True)
+    property_category = models.CharField("Property Category", choices=property_category_choice, default="LIVING HOUSE", max_length=20,blank=True,null=True)
+    property_type = models.CharField("Property Type", max_length=50, null=True, blank=True)
     price = models.DecimalField('Price', max_digits=20, decimal_places=2,blank=True,null=True)
     street = models.CharField('Street Address', max_length=100,blank=True,null=True)
     city = models.CharField('City',max_length=30,blank=True,null=True)
